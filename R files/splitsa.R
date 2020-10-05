@@ -176,7 +176,7 @@ splitsa<-function(s, breakPos, seasonal=c("HarrisonStevens", "Crude", "Trigonome
 autosplitsa<-function(y){
   so<-rjdsts::seasonalbreaks(y)
   breakpos<-which.max(so)-1
-  q<-splitsa(y, breakpos, common.trend = T, common.seasonal = F, common.irregular = T)
+  q<-splitsa(y, breakpos, common.trend = T, common.seasonal = F, common.irregular = F)
   return (q)
 }
 
