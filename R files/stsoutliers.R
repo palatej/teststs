@@ -1,6 +1,6 @@
 library(rjdsts)
 
-a<-stsoutliers(log(retail$BookStores), seasonal = "HarrisonStevens", X.td = c(1,1,1,1,1,2,0))
+a<-rjdsts::stsoutliers(log(retail$BookStores), seasonal = "HarrisonStevens", X.td = c(1,1,1,1,1,2,0), so=T)
 print(a$model$variables)
 print(a$model$b)
 print(a$model$b/sqrt(diag(a$model$bcov)))
