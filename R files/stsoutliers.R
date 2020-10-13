@@ -58,3 +58,17 @@ e<-stsoutliers(log(t), seasonal = "HarrisonStevens", X.td = c(1,1,1,1,1,2,0))
 print(e$model$variables)
 print(e$model$b)
 print(e$model$b/sqrt(diag(e$model$bcov)))
+
+
+alloutliers<-function(y, td=c(1,1,1,1,1,2,0), so=F){
+  absm<-rjdsts::stsoutliers(y, seasonal = "HarrisonStevens", X.td = td, so=so)
+  print(absm$model$variables)
+  print(absm$model$b/sqrt(diag(absm$model$bcov )))
+  at<-rjdsts::tramooutliers(y, X.td = td, so=so)
+  print(at$model$variables)
+  print(at$model$b/sqrt(diag(at$model$bcov )))
+  ax<-rjdsts::regarimaoutliers(y, X.td = td, so=so)
+  print(ax$model$variables)
+  print(ax$model$b/sqrt(diag(ax$model$bcov )))
+}
+
