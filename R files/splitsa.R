@@ -1,5 +1,5 @@
+library(rjdoutliers)
 library(rjdssf)
-library(rjdsts)
 
 #Sugar production in Belgium. Break in 1987 (pos=156)
 data<-c(34.8,21,32.2,22.4,18.2,15.9,13.3,16.7,19,91.5,246.5,258.3,126.5,19.7,24.8,16.7,12.2,14.3,10.9,14.9,17.6,211.7,358.3,201,
@@ -174,13 +174,13 @@ splitsa<-function(s, breakPos, seasonal=c("HarrisonStevens", "Crude", "Trigonome
 }
 
 autosplitsa<-function(y){
-  so<-rjdsts::seasonalbreaks(y)
+  so<-rjdoutliers::seasonalbreaks(y)
   breakpos<-which.max(so)-1
   q<-splitsa(y, breakpos, common.trend = T, common.seasonal = F, common.irregular = F)
   return (q)
 }
 
-so<-rjdsts::seasonalbreaks(sugar)
+so<-rjdoutliers::seasonalbreaks(sugar)
 breakpos<-which.max(so)-1
 
 q<-splitsa(sugar, breakpos, common.trend = T, common.seasonal = F, common.irregular = T)

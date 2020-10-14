@@ -1,24 +1,20 @@
-library(rjdsts)
+library(rjdoutliers)
 
-a<-rjdsts::stsoutliers(log(retail$BookStores), seasonal = "HarrisonStevens", X.td = c(1,1,1,1,1,2,0), so=T)
-print(a$model$variables)
-print(a$model$b)
-print(a$model$b/sqrt(diag(a$model$bcov)))
+a<-rjdoutliers::stsoutliers(log(retail$BookStores), seasonal = "HarrisonStevens", X.td = c(1,1,1,1,1,2,0), so=T)
+print(a$outliers)
+print(a$variables)
 
 b<-stsoutliers(log(retail$JewelryStores), seasonal = "HarrisonStevens", X.td = c(1,2,3,4,5,6,0))
-print(b$model$variables)
-print(b$model$b)
-print(b$model$b/sqrt(diag(b$model$bcov)))
+print(b$outliers)
+print(b$variables)
 
 c<-stsoutliers(log(retail$MotorVehicleAndPartsDealers), seasonal = "HarrisonStevens", X.td = c(1,1,1,1,1,2,0))
-print(c$model$variables)
-print(c$model$b)
-print(c$model$b/sqrt(diag(c$model$bcov)))
+print(c$outliers)
+print(c$variables)
 
 d<-stsoutliers(log(retail$BuildingMatAndSuppliesDealers), seasonal = "HarrisonStevens", X.td = c(1,1,1,1,1,2,0))
-print(d$model$variables)
-print(d$model$b)
-print(d$model$b/sqrt(diag(d$model$bcov)))
+print(c$outliers)
+print(c$variables)
 
 turnover<-c(63.02,66.94,77.95,67.86,66.12,75.56,64.8,60.24,73.34,
             75.4,70.99,77.31,67.4,71.94,83.26,70.05,74.88,78.17,
@@ -55,20 +51,19 @@ turnover<-c(63.02,66.94,77.95,67.86,66.12,75.56,64.8,60.24,73.34,
 t<-ts(data=turnover, frequency = 12, start = c(1991,1))
 
 e<-stsoutliers(log(t), seasonal = "HarrisonStevens", X.td = c(1,1,1,1,1,2,0))
-print(e$model$variables)
-print(e$model$b)
-print(e$model$b/sqrt(diag(e$model$bcov)))
+print(e$outliers)
+print(e$variables)
 
 
 alloutliers<-function(y, td=c(1,1,1,1,1,2,0), so=F){
-  absm<-rjdsts::stsoutliers(y, seasonal = "HarrisonStevens", X.td = td, so=so)
-  print(absm$model$variables)
-  print(absm$model$b/sqrt(diag(absm$model$bcov )))
-  at<-rjdsts::tramooutliers(y, X.td = td, so=so)
-  print(at$model$variables)
-  print(at$model$b/sqrt(diag(at$model$bcov )))
-  ax<-rjdsts::regarimaoutliers(y, X.td = td, so=so)
-  print(ax$model$variables)
-  print(ax$model$b/sqrt(diag(ax$model$bcov )))
+  absm<-rjdoutliers::stsoutliers(y, seasonal = "HarrisonStevens", X.td = td, so=so)
+  print(absm$outliers)
+  print(absm$variables)
+  at<-rjdoutliers::tramooutliers(y, X.td = td, so=so)
+  print(at$outliers)
+  print(at$variables)
+  ax<-rjdoutliers::regarimaoutliers(y, X.td = td, so=so)
+  print(ax$outliers)
+  print(ax$variables)
 }
 
